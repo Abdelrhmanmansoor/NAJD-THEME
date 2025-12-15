@@ -1,0 +1,14 @@
+{# Store Mode Layout #}
+<div id="app" class="store-layout">
+    <header class="store-header">
+        {% component 'header' %}
+    </header>
+
+    <main class="store-content">
+        {{ content_for_layout | raw }}
+    </main>
+
+    <footer class="store-footer">
+        {% component 'footer' %}
+    </footer>
+</div>

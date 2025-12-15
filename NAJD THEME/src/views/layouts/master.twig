@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{ user.language.code }}" dir="{{ user.language.dir }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    {{ theme.assets.css('main.css') | raw }}
+    
+    {# Campaign OS Configuration #}
+    <script>
+        window.NajdConfig = {
+            mode: "{{ theme.settings.campaign_mode_active ? 'campaign' : 'store' }}",
+            language: "{{ user.language.code }}"
+        };
+    </script>
+</head>
+<body class="mode-{{ theme.settings.campaign_mode_active ? 'campaign' : 'store' }}">
+
+    {# Layout Decision Engine #}
+    {% if theme.settings.campaign_mode_active %}
+        {% if theme.settings.layout_mode == 'funnel' %}
+            {% include 'layouts/funnel.twig' %}
+        {% else %}
+            {% include 'layouts/campaign.twig' %}
+        {% endif %}
+    {% else %}
+        {% include 'layouts/store.twig' %}
+    {% endif %}
+
+    {{ theme.assets.js('app.js') | raw }}
+</body>
+</html>

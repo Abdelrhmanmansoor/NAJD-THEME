@@ -1,0 +1,13 @@
+{# 
+    Component: Progress Bar
+    Description: Psychological trigger to show completion status.
+#}
+<div class="progress-indicator {{ position|default('top') }}" data-scroll-spy="{{ scroll_spy|default('true') }}">
+    <div class="progress-label">
+        <span class="text">{{ label|default('Offer Availability') }}</span>
+        <span class="percentage">0%</span>
+    </div>
+    <div class="progress-track">
+        <div class="progress-fill" style="width: {{ initial_width|default('0') }}%"></div>
+    </div>
+</div>

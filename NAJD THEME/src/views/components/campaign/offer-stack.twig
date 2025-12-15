@@ -1,0 +1,39 @@
+{# 
+    Component: Offer Stack
+    Description: List of included items/bonuses with strikethrough prices.
+#}
+<section class="offer-stack-component decision-zone">
+    <div class="container">
+        <h3 class="stack-title">{{ title|default('Here Is What You Get:') }}</h3>
+        
+        <div class="stack-list">
+            {% for item in items %}
+                <div class="stack-item">
+                    <div class="item-name">
+                        <i class="icon-check"></i>
+                        <span>{{ item.name }}</span>
+                    </div>
+                    <div class="item-value">
+                        <span class="value-label">Value:</span>
+                        <span class="price strike">{{ item.value }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+            
+            <div class="stack-total">
+                <span class="total-label">Total Value:</span>
+                <span class="total-price strike">{{ total_value }}</span>
+            </div>
+            
+            <div class="stack-price">
+                <span class="price-label">Today Only:</span>
+                <span class="final-price">{{ price }}</span>
+            </div>
+        </div>
+        
+        <div class="stack-action">
+             {% import 'macros/campaign_macros.twig' as campaign %}
+             {{ campaign.cta('Get This Offer Now', purchase_url, 'primary', 'offer_stack_cta') }}
+        </div>
+    </div>
+</section>

@@ -1,0 +1,29 @@
+{# 
+    Component: Trust Bomb
+    Description: Aggregated social proof and trust signals.
+#}
+<section class="trust-bomb-component theme-{{ theme|default('light') }}">
+    <div class="container">
+        <div class="trust-grid">
+            <div class="trust-item">
+                <img src="{{ 'images/icons/guarantee.svg' | asset }}" alt="Money Back Guarantee">
+                <h4>30-Day Guarantee</h4>
+            </div>
+            <div class="trust-item">
+                <img src="{{ 'images/icons/support.svg' | asset }}" alt="24/7 Support">
+                <h4>24/7 Support</h4>
+            </div>
+            <div class="trust-item">
+                <img src="{{ 'images/icons/secure.svg' | asset }}" alt="SSL Secure">
+                <h4>100% Secure</h4>
+            </div>
+        </div>
+        
+        <div class="payment-icons">
+            {# Iterate through payment methods #}
+            {% for method in store.payment_methods %}
+                <img src="{{ method.icon }}" alt="{{ method.name }}">
+            {% endfor %}
+        </div>
+    </div>
+</section>

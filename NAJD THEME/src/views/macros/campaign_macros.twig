@@ -1,0 +1,39 @@
+{# Najd Campaign Macros #}
+
+{# 
+    Macro: CTA
+    Renders a conversion-focused button with tracking attributes.
+#}
+{% macro cta(text, url, type='primary', tracking_id='generic_cta') %}
+    <a href="{{ url }}" 
+       class="btn btn-{{ type }} cta-button" 
+       data-tracking-id="{{ tracking_id }}"
+       role="button">
+        {{ text }}
+    </a>
+{% endmacro %}
+
+{#
+    Macro: Section Wrapper
+    Wraps content in a standard campaign section with ID and classes.
+#}
+{% macro section_wrapper(id, class_names, content) %}
+    <section id="{{ id }}" class="campaign-section {{ class_names }}">
+        <div class="container">
+            {{ content }}
+        </div>
+    </section>
+{% endmacro %}
+
+{#
+    Macro: Countdown
+    Renders a countdown timer component.
+#}
+{% macro countdown(end_date, theme='dark') %}
+    <div class="countdown-timer theme-{{ theme }}" data-end-date="{{ end_date }}">
+        <div class="timer-unit"><span class="days">00</span><small>Days</small></div>
+        <div class="timer-unit"><span class="hours">00</span><small>Hours</small></div>
+        <div class="timer-unit"><span class="minutes">00</span><small>Minutes</small></div>
+        <div class="timer-unit"><span class="seconds">00</span><small>Seconds</small></div>
+    </div>
+{% endmacro %}

@@ -1,0 +1,22 @@
+{# 
+    Component: Hero Video
+    Description: Variant of campaign hero with video background.
+#}
+<section class="campaign-hero hero-video decision-zone">
+    <div class="hero-background">
+        <video autoplay muted loop playsinline poster="{{ image }}">
+            <source src="{{ video_url }}" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <div class="container">
+        <div class="hero-content text-center">
+            <h1 class="hero-title animate-fade-up">{{ title }}</h1>
+            <div class="hero-actions animate-fade-up delay-200">
+                {% import 'macros/campaign_macros.twig' as campaign %}
+                {{ campaign.cta(cta_text, cta_url, 'primary', 'hero_video_cta') }}
+            </div>
+        </div>
+    </div>
+</section>

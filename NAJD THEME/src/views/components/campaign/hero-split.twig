@@ -1,0 +1,21 @@
+{# 
+    Component: Hero Split
+    Description: 50/50 Layout for Product vs Copy.
+#}
+<section class="campaign-hero hero-split decision-zone">
+    <div class="container">
+        <div class="split-layout">
+            <div class="split-content">
+                <h1 class="hero-title">{{ title }}</h1>
+                <p class="hero-description">{{ description }}</p>
+                <div class="hero-actions">
+                     {% import 'macros/campaign_macros.twig' as campaign %}
+                     {{ campaign.cta(cta_text, cta_url, 'primary', 'hero_split_cta') }}
+                </div>
+            </div>
+            <div class="split-media">
+                <img src="{{ image }}" alt="{{ title }}">
+            </div>
+        </div>
+    </div>
+</section>
