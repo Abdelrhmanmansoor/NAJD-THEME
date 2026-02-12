@@ -1,0 +1,6 @@
+{% for option in product.options %}
+<div class="najd-option">
+  <label class="najd-option__label">{{ option.name }}</label>
+  <salla-product-options option-id="{{ option.id }}"></salla-product-options>
+</div>
+{% endfor %}

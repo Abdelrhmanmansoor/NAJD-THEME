@@ -1,0 +1,10 @@
+{% extends "layouts/master.twig" %}
+{% block content %}
+<section class="najd-brand-single"><div class="najd-container">
+  <h1>{{ brand.name }}</h1>
+  {% if brand.description %}<p>{{ brand.description }}</p>{% endif %}
+  <div class="najd-grid najd-grid--4">
+    {% for product in products %}{% include 'components/product/card.twig' %}{% endfor %}
+  </div>
+</div></section>
+{% endblock %}

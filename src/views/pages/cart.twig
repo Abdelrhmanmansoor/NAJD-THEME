@@ -1,0 +1,10 @@
+{% extends "layouts/master.twig" %}
+{% block content %}
+<section class="najd-cart">
+  <div class="najd-container">
+    <h1>{{ trans('common.cart') }}</h1>
+    {% include 'components/home/shipping-progress.twig' %}
+    <salla-cart-details></salla-cart-details>
+  </div>
+</section>
+{% endblock %}

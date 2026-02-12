@@ -1,0 +1,15 @@
+<div class="najd-popup-overlay" id="popup-overlay">
+  <div class="najd-popup" id="smart-popup">
+    <button class="najd-popup__close" id="popup-close" aria-label="إغلاق">✕</button>
+    <div class="najd-popup__icon">🎁</div>
+    <h3>احصل على خصم {{ theme.settings.popup_discount }}</h3>
+    <p>اشترك في نشرتنا البريدية واحصل على كوبون خصم فوري</p>
+    <salla-offer-subscribe inline></salla-offer-subscribe>
+    <div class="najd-popup__coupon">
+      <span>كود الخصم:</span>
+      <strong>{{ theme.settings.popup_coupon }}</strong>
+      <button class="najd-popup__copy" data-copy="{{ theme.settings.popup_coupon }}">نسخ</button>
+    </div>
+    <small>🔒 بياناتك آمنة ولن نشاركها</small>
+  </div>
+</div>

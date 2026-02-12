@@ -1,0 +1,29 @@
+{% extends "layouts/master.twig" %}
+{% block content %}
+<section class="najd-products-page">
+  <div class="najd-container">
+    <div class="najd-products-page__header">
+      <salla-breadcrumb></salla-breadcrumb>
+      <h1>{{ category.name|default(trans('common.products')) }}</h1>
+      {% if category.description %}<p>{{ category.description }}</p>{% endif %}
+    </div>
+    <div class="najd-products-page__layout">
+      <aside class="najd-products-page__sidebar">
+        <salla-filters></salla-filters>
+      </aside>
+      <div class="najd-products-page__grid">
+        <div class="najd-products-page__toolbar">
+          <salla-products-list-sorting></salla-products-list-sorting>
+          <span>{{ products.total }} {{ trans('common.product') }}</span>
+        </div>
+        <div class="najd-grid najd-grid--3">
+          {% for product in products %}
+            {% include 'components/product/card.twig' %}
+          {% endfor %}
+        </div>
+        <salla-infinite-scroll></salla-infinite-scroll>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "layouts/master.twig" %}
+{% block content %}
+<section class="najd-thankyou">
+  <div class="najd-container najd-thankyou__inner">
+    <div class="najd-thankyou__icon">✅</div>
+    <h1>{{ trans('common.thank_you') }}</h1>
+    <p>{{ trans('common.order_received') }}</p>
+    <salla-order-details order-id="{{ order.id }}"></salla-order-details>
+    <a href="{{ store.url }}" class="najd-btn najd-btn--primary">متابعة التسوق</a>
+  </div>
+</section>
+{# Conversion Tracking #}
+<script>
+if(typeof fbq!=='undefined')fbq('track','Purchase',{value:{{ order.total }},currency:'{{ store.currency }}'});
+if(typeof gtag!=='undefined')gtag('event','purchase',{transaction_id:'{{ order.id }}',value:{{ order.total }}});
+if(typeof snaptr!=='undefined')snaptr('track','PURCHASE',{price:{{ order.total }},currency:'{{ store.currency }}'});
+if(typeof ttq!=='undefined')ttq.track('CompletePayment',{value:{{ order.total }},currency:'{{ store.currency }}'});
+</script>
+{% endblock %}

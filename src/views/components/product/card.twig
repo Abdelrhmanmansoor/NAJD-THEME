@@ -1,0 +1,36 @@
+{# Product Card — with Quick View #}
+<div class="najd-product-card" data-id="{{ product.id }}">
+  <a href="{{ product.url }}" class="najd-product-card__img">
+    <img src="{{ product.image }}" alt="{{ product.name }}" loading="lazy">
+    {% if product.discount_percentage %}
+    <span class="najd-badge najd-badge--danger">-{{ product.discount_percentage }}%</span>
+    {% endif %}
+    {% if product.is_new %}
+    <span class="najd-badge najd-badge--accent">جديد</span>
+    {% endif %}
+    <div class="najd-product-card__actions">
+      <salla-add-product-button product-id="{{ product.id }}">
+        <span>أضف للسلة</span>
+      </salla-add-product-button>
+      <button class="najd-quick-view-btn" data-id="{{ product.id }}" aria-label="نظرة سريعة">
+        <i class="sicon-eye"></i>
+      </button>
+    </div>
+  </a>
+  <div class="najd-product-card__info">
+    <a href="{{ product.url }}" class="najd-product-card__name">{{ product.name }}</a>
+    <div class="najd-product-card__price">
+      <span class="najd-product-card__current">{{ product.price|money }}</span>
+      {% if product.regular_price %}
+      <span class="najd-product-card__old">{{ product.regular_price|money }}</span>
+      {% endif %}
+    </div>
+    {% if product.rating %}
+    <div class="najd-product-card__rating">
+      <salla-rating-stars value="{{ product.rating.stars }}"></salla-rating-stars>
+      <small>({{ product.rating.count }})</small>
+    </div>
+    {% endif %}
+  </div>
+  <salla-add-wishlist-button product-id="{{ product.id }}"></salla-add-wishlist-button>
+</div>

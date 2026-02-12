@@ -1,0 +1,20 @@
+{# Bento Grid Categories #}
+<section class="najd-bento">
+  <div class="najd-container">
+    <div class="najd-section-header">
+      <span class="najd-overline">{{ component.settings.overline }}</span>
+      <h2>{{ component.settings.title }}</h2>
+    </div>
+    <div class="najd-bento__grid">
+      {% for cat in store.categories %}
+      <a href="{{ cat.url }}" class="najd-bento__item {% if loop.index <= 1 %}najd-bento__item--wide{% endif %}">
+        {% if cat.image %}<img src="{{ cat.image }}" alt="{{ cat.name }}" loading="lazy">{% endif %}
+        <div class="najd-bento__overlay">
+          <span class="najd-bento__name">{{ cat.name }}</span>
+          <span class="najd-bento__count">{{ cat.products_count }} {{ trans('common.product') }}</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

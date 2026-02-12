@@ -1,0 +1,45 @@
+{# components/footer/footer.twig #}
+<footer class="najd-footer">
+  <div class="najd-container">
+    <div class="najd-footer__grid">
+      <div class="najd-footer__about">
+        <a href="{{ store.url }}" class="najd-footer__logo">
+          {% if store.logo %}<img src="{{ store.logo }}" alt="{{ store.name }}">
+          {% else %}<span>{{ store.name }}</span>{% endif %}
+        </a>
+        <p>{{ theme.settings.footer_about }}</p>
+        <div class="najd-footer__social">
+          {% for link in store.social %}
+          <a href="{{ link.url }}" target="_blank" rel="noopener" aria-label="{{ link.name }}">
+            <i class="sicon-{{ link.icon }}"></i>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="najd-footer__col">
+        <h4>{{ trans('common.quick_links') }}</h4>
+        {% for item in store.menu %}
+        <a href="{{ item.url }}">{{ item.title }}</a>
+        {% endfor %}
+      </div>
+      <div class="najd-footer__col">
+        <h4>{{ trans('common.help') }}</h4>
+        {% for page in store.pages %}
+        <a href="{{ page.url }}">{{ page.title }}</a>
+        {% endfor %}
+      </div>
+      <div class="najd-footer__col">
+        <h4>تواصل معنا</h4>
+        {% if store.email %}<a href="mailto:{{ store.email }}"><i class="sicon-envelope"></i> {{ store.email }}</a>{% endif %}
+        {% if store.phone %}<a href="tel:{{ store.phone }}"><i class="sicon-phone"></i> {{ store.phone }}</a>{% endif %}
+      </div>
+    </div>
+    <div class="najd-footer__bottom">
+      <span>© {{ 'now'|date('Y') }} {{ store.name }} — {{ trans('common.all_rights') }}</span>
+      {% if store.tax_number %}
+      <span class="najd-footer__tax">{{ trans('common.tax_number') }}: {{ store.tax_number }}</span>
+      {% endif %}
+      <salla-payment-methods></salla-payment-methods>
+    </div>
+  </div>
+</footer>

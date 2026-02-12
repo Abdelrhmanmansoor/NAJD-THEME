@@ -1,0 +1,82 @@
+{# layouts/master.twig — Najd Theme Master Layout #}
+<!DOCTYPE html>
+<html lang="{{ store.locale }}" dir="{{ store.locale == 'ar' ? 'rtl' : 'ltr' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ page.meta_description|default(store.description) }}">
+  <meta property="og:title" content="{{ page.title|default(store.name) }}">
+  <meta property="og:description" content="{{ page.meta_description|default(store.description) }}">
+  <meta property="og:image" content="{{ store.logo }}">
+  <meta property="og:url" content="{{ page.url }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>{{ page.title|default(store.name) }}</title>
+  <link rel="icon" href="{{ store.favicon }}" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ 'styles/app.css' | asset }}">
+
+  {# Schema Markup #}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "{{ store.name }}",
+    "url": "{{ store.url }}"
+  }
+  </script>
+
+  {# Tracking Pixels #}
+  {% if theme.settings.meta_pixel_id %}
+  <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','{{ theme.settings.meta_pixel_id }}');fbq('track','PageView');</script>
+  {% endif %}
+  {% if theme.settings.google_tag_id %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ theme.settings.google_tag_id }}"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','{{ theme.settings.google_tag_id }}');</script>
+  {% endif %}
+  {% if theme.settings.snap_pixel_id %}
+  <script>!function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function(){a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};a.queue=[];var s=t.createElement('script');s.async=!0;s.src=n;var r=t.getElementsByTagName('script')[0];r.parentNode.insertBefore(s,r)}(window,document,'https://sc-static.net/scevent.min.js');snaptr('init','{{ theme.settings.snap_pixel_id }}');snaptr('track','PAGE_VIEW');</script>
+  {% endif %}
+  {% if theme.settings.tiktok_pixel_id %}
+  <script>!function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"];ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e};ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{};ttq._i[e]=[];ttq._i[e]._u=i;ttq._t=ttq._t||{};ttq._t[e+""]=+new Date;ttq._o=ttq._o||{};ttq._o[e+""]=n||{};var o=document.createElement("script");o.type="text/javascript";o.async=!0;o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};ttq.load('{{ theme.settings.tiktok_pixel_id }}');ttq.page()}(window,document,'ttq');</script>
+  {% endif %}
+
+  {# UTM Auto-Tracker #}
+  <script>
+  (function(){
+    var params=['utm_source','utm_medium','utm_campaign','utm_term','utm_content'];
+    var qs=new URLSearchParams(window.location.search);
+    params.forEach(function(p){var v=qs.get(p);if(v)sessionStorage.setItem(p,v)});
+  })();
+  </script>
+</head>
+<body class="najd-salla {{ theme.settings.dark_mode ? 'dark' : 'light' }}">
+  {% include 'components/header/announcement-bar.twig' %}
+  {% include 'components/header/header.twig' %}
+
+  <main id="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include 'components/footer/footer.twig' %}
+
+  {# Social Proof Notifications #}
+  {% if theme.settings.social_proof_enabled %}
+    {% include 'components/home/social-proof.twig' %}
+  {% endif %}
+
+  {# Smart Popup #}
+  {% if theme.settings.popup_enabled %}
+    {% include 'components/home/smart-popup.twig' %}
+  {% endif %}
+
+  {# WhatsApp Float #}
+  {% if theme.settings.whatsapp_number %}
+  <a href="https://wa.me/{{ theme.settings.whatsapp_number }}" target="_blank" class="najd-whatsapp-btn" aria-label="تواصل واتساب">
+    <i class="sicon-whatsapp"></i>
+  </a>
+  {% endif %}
+
+  <script src="{{ 'js/app.js' | asset }}"></script>
+</body>
+</html>

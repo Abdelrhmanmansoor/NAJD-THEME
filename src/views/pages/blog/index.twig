@@ -1,0 +1,20 @@
+{% extends "layouts/master.twig" %}
+{% block content %}
+<section class="najd-blog">
+  <div class="najd-container">
+    <h1>{{ trans('common.blog') }}</h1>
+    <div class="najd-grid najd-grid--3">
+      {% for article in articles %}
+      <a href="{{ article.url }}" class="najd-blog-card">
+        <img src="{{ article.image }}" alt="{{ article.title }}" loading="lazy">
+        <div class="najd-blog-card__info">
+          <small>{{ article.date|date('d M Y') }}</small>
+          <h3>{{ article.title }}</h3>
+          <p>{{ article.excerpt }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

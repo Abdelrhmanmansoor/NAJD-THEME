@@ -1,0 +1,8 @@
+<div class="najd-comment">
+  <div class="najd-comment__header">
+    <strong>{{ comment.author }}</strong>
+    <salla-rating-stars value="{{ comment.rating }}"></salla-rating-stars>
+    <small>{{ comment.date|date('d/m/Y') }}</small>
+  </div>
+  <p>{{ comment.text }}</p>
+</div>

@@ -1,0 +1,70 @@
+{% extends "layouts/master.twig" %}
+{% block content %}
+<section class="najd-product-single">
+  <div class="najd-container">
+    <salla-breadcrumb></salla-breadcrumb>
+    <div class="najd-product-single__layout">
+      {# Gallery #}
+      <div class="najd-product-single__gallery">
+        <salla-product-gallery product-id="{{ product.id }}"></salla-product-gallery>
+      </div>
+      {# Info — Sticky #}
+      <div class="najd-product-single__info" id="product-info-sticky">
+        <h1 class="najd-product-single__name">{{ product.name }}</h1>
+        {% if product.brand %}
+        <a href="{{ product.brand.url }}" class="najd-product-single__brand">{{ product.brand.name }}</a>
+        {% endif %}
+        <salla-rating-stars value="{{ product.rating.stars }}"></salla-rating-stars>
+        <div class="najd-product-single__price">
+          <salla-product-price product-id="{{ product.id }}"></salla-product-price>
+          {% if product.discount_percentage %}
+          <span class="najd-badge najd-badge--danger">خصم {{ product.discount_percentage }}%</span>
+          {% endif %}
+        </div>
+        {% if product.quantity %}
+        <div class="najd-product-single__stock najd-badge najd-badge--success">متوفر ({{ product.quantity }})</div>
+        {% endif %}
+        <div class="najd-product-single__desc">{{ product.description|raw }}</div>
+        {% include 'components/product/options.twig' %}
+        <salla-quantity-input product-id="{{ product.id }}"></salla-quantity-input>
+        <div class="najd-product-single__buttons">
+          <salla-add-product-button product-id="{{ product.id }}" class="najd-btn najd-btn--primary najd-btn--full">
+            أضف للسلة
+          </salla-add-product-button>
+          <salla-buy-now-button product-id="{{ product.id }}" class="najd-btn najd-btn--outline">اشتر الآن</salla-buy-now-button>
+        </div>
+        <salla-add-wishlist-button product-id="{{ product.id }}"></salla-add-wishlist-button>
+        <salla-product-share></salla-product-share>
+        {# Trust Badges #}
+        <div class="najd-trust-badges">
+          <div class="najd-trust-badges__item"><i class="sicon-shipping-fast"></i><span>شحن سريع</span></div>
+          <div class="najd-trust-badges__item"><i class="sicon-shield-check"></i><span>ضمان الجودة</span></div>
+          <div class="najd-trust-badges__item"><i class="sicon-refresh"></i><span>استرجاع مجاني</span></div>
+        </div>
+      </div>
+    </div>
+    {# Tabs: Description, Specs, Reviews #}
+    <div class="najd-product-tabs" id="product-tabs">
+      <div class="najd-product-tabs__nav">
+        <button class="active" data-tab="desc">الوصف</button>
+        <button data-tab="specs">المواصفات</button>
+        <button data-tab="reviews">التقييمات</button>
+      </div>
+      <div class="najd-product-tabs__content">
+        <div id="tab-desc" class="active">{{ product.description|raw }}</div>
+        <div id="tab-specs"><salla-product-options product-id="{{ product.id }}" mode="info"></salla-product-options></div>
+        <div id="tab-reviews">{% include 'components/comments.twig' with {type:'product', entity_id: product.id} %}</div>
+      </div>
+    </div>
+    {# Related Products — Upsell #}
+    {% if related_products|length %}
+    <div class="najd-related">
+      <div class="najd-section-header"><span class="najd-overline">قد يعجبك أيضاً</span><h2>منتجات مشابهة</h2></div>
+      <div class="najd-grid najd-grid--4">
+        {% for product in related_products %}{% include 'components/product/card.twig' %}{% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

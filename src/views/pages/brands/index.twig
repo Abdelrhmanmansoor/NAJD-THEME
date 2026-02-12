@@ -1,0 +1,14 @@
+{% extends "layouts/master.twig" %}
+{% block content %}
+<section class="najd-brands"><div class="najd-container">
+  <h1>{{ trans('common.brands') }}</h1>
+  <div class="najd-grid najd-grid--4">
+    {% for brand in brands %}
+    <a href="{{ brand.url }}" class="najd-brand-card">
+      {% if brand.logo %}<img src="{{ brand.logo }}" alt="{{ brand.name }}">{% endif %}
+      <span>{{ brand.name }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</div></section>
+{% endblock %}

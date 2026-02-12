@@ -1,0 +1,63 @@
+{# components/header/header.twig #}
+<header class="najd-header" id="najd-header">
+  <div class="najd-container najd-header__inner">
+    <div class="najd-header__right">
+      <button class="najd-header__menu-btn" id="mobile-menu-btn" aria-label="القائمة">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="{{ store.url }}" class="najd-header__logo">
+        {% if store.logo %}<img src="{{ store.logo }}" alt="{{ store.name }}" loading="eager">
+        {% else %}<span class="najd-header__logo-text">{{ store.name }}</span>{% endif %}
+      </a>
+    </div>
+
+    <nav class="najd-header__nav" id="main-nav">
+      {% for item in store.menu %}
+      <div class="najd-header__nav-item {% if item.children|length %}has-children{% endif %}">
+        <a href="{{ item.url }}">{{ item.title }}</a>
+        {% if item.children|length %}
+        <div class="najd-mega-menu">
+          <div class="najd-mega-menu__grid">
+            {% for child in item.children %}
+            <a href="{{ child.url }}" class="najd-mega-menu__item">
+              {% if child.image %}<img src="{{ child.image }}" alt="{{ child.title }}" loading="lazy">{% endif %}
+              <span>{{ child.title }}</span>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </nav>
+
+    <div class="najd-header__left">
+      <button class="najd-header__icon" id="search-btn" aria-label="بحث">
+        <i class="sicon-search"></i>
+      </button>
+      <salla-user-settings inline></salla-user-settings>
+      <salla-cart-summary></salla-cart-summary>
+    </div>
+  </div>
+</header>
+
+{# Mobile Menu Overlay #}
+<div class="najd-mobile-menu" id="mobile-menu">
+  <div class="najd-mobile-menu__header">
+    <a href="{{ store.url }}">{{ store.name }}</a>
+    <button id="mobile-menu-close" aria-label="إغلاق"><i class="sicon-cancel"></i></button>
+  </div>
+  <nav class="najd-mobile-menu__nav">
+    {% for item in store.menu %}
+    <a href="{{ item.url }}">{{ item.title }}</a>
+    {% endfor %}
+  </nav>
+</div>
+
+{# Search Modal #}
+<div class="najd-search-modal" id="search-modal">
+  <div class="najd-search-modal__inner">
+    <salla-search></salla-search>
+    <button class="najd-search-modal__close" id="search-close"><i class="sicon-cancel"></i></button>
+  </div>
+</div>

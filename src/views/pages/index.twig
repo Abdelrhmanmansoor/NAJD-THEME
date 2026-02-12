@@ -1,0 +1,48 @@
+{# pages/index.twig — Najd Home Page #}
+{% extends "layouts/master.twig" %}
+{% block content %}
+
+{# Hero Slider #}
+<section class="najd-hero">
+  <div class="najd-hero__bg-grid"></div>
+  <div class="najd-hero__orb"></div>
+  <div class="najd-container najd-hero__inner">
+    <div class="najd-hero__content">
+      <salla-slider id="hero-slider" auto-play auto-play-speed="5000" show-controls="false">
+        {% for slide in store.slider %}
+        <div class="najd-hero__slide">
+          <span class="najd-badge najd-badge--accent">{{ slide.title }}</span>
+          <h1 class="najd-hero__title">{{ slide.description }}</h1>
+          <a href="{{ slide.url }}" class="najd-btn najd-btn--primary">تسوق الآن</a>
+        </div>
+        {% endfor %}
+      </salla-slider>
+      <div class="najd-hero__indicators" id="hero-indicators"></div>
+    </div>
+    <div class="najd-hero__showcase">
+      {% if store.products|length %}
+      {% set fp = store.products|first %}
+      <div class="najd-hero__card">
+        <img src="{{ fp.image }}" alt="{{ fp.name }}" loading="eager">
+        {% if fp.discount_percentage %}<span class="najd-badge najd-badge--danger">-{{ fp.discount_percentage }}%</span>{% endif %}
+        <span class="najd-hero__card-name">{{ fp.name }}</span>
+        <span class="najd-hero__card-price">{{ fp.price|money }}</span>
+        {% if fp.regular_price %}<span class="najd-hero__card-old">{{ fp.regular_price|money }}</span>{% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{# Shipping Progress #}
+{% include 'components/home/shipping-progress.twig' %}
+
+{# Countdown Timer #}
+{% if theme.settings.countdown_enabled %}
+  {% include 'components/home/countdown-timer.twig' %}
+{% endif %}
+
+{# Dynamic Components — renders features + custom components from twilight.json #}
+{% component home %}
+
+{% endblock %}

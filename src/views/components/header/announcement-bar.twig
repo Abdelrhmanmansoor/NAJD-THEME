@@ -1,0 +1,12 @@
+{# components/header/announcement-bar.twig #}
+{% if theme.settings.announcement_enabled %}
+<div class="najd-announce" id="announce-bar">
+  <div class="najd-announce__track">
+    {% for i in 0..7 %}
+    <a href="{{ theme.settings.announcement_url }}" class="najd-announce__item">
+      {{ theme.settings.announcement_text }}
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

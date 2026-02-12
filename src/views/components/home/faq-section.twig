@@ -1,0 +1,13 @@
+<section class="najd-faq">
+  <div class="najd-container">
+    <div class="najd-section-header"><h2>{{ component.settings.title }}</h2></div>
+    <div class="najd-faq__list" id="faq-list">
+      {% for faq in store.faqs %}
+      <div class="najd-faq__item">
+        <button class="najd-faq__q" aria-expanded="false">{{ faq.question }}<i class="sicon-keyboard_arrow_down"></i></button>
+        <div class="najd-faq__a">{{ faq.answer|raw }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

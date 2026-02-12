@@ -1,0 +1,15 @@
+<section class="najd-quick-links">
+  <div class="najd-container">
+    <div class="najd-section-header"><h2>{{ component.settings.title }}</h2></div>
+    <div class="najd-quick-links__grid">
+      {% for cat in store.categories %}
+      <a href="{{ cat.url }}" class="najd-quick-links__item">
+        <div class="najd-quick-links__img">
+          {% if cat.image %}<img src="{{ cat.image }}" alt="{{ cat.name }}" loading="lazy">{% endif %}
+        </div>
+        <span>{{ cat.name }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

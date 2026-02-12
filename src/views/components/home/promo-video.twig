@@ -1,0 +1,10 @@
+{% if component.settings.video_url %}
+<section class="najd-promo-video">
+  <div class="najd-container">
+    <div class="najd-section-header"><h2>{{ component.settings.title }}</h2><p>{{ component.settings.description }}</p></div>
+    <div class="najd-promo-video__wrap">
+      <video src="{{ component.settings.video_url }}" autoplay muted loop playsinline></video>
+    </div>
+  </div>
+</section>
+{% endif %}
